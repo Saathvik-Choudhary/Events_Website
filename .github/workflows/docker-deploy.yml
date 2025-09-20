@@ -3,14 +3,14 @@ name: Build and Deploy
 on:
   push:
     branches:
-      - main   # Runs whenever you push to main
+      - main   # auto deploy on commits to main
 
 jobs:
   build-deploy:
     runs-on: ubuntu-latest
 
     steps:
-      # Checkout repo
+      # --- Checkout ---
       - name: Checkout code
         uses: actions/checkout@v4
 
@@ -23,7 +23,7 @@ jobs:
 
       - name: Build Spring Boot
         run: mvn -B clean package -DskipTests
-        working-directory: backend   # change if your backend path is different
+        working-directory: backend   # adjust if backend folder is different
 
       # --- Frontend (React) ---
       - name: Setup Node
@@ -35,7 +35,7 @@ jobs:
         run: |
           npm install
           npm run build
-        working-directory: frontend   # change if your frontend path is different
+        working-directory: frontend   # adjust if frontend folder is different
 
       # --- Deploy React build to GitHub Pages ---
       - name: Deploy to GitHub Pages
@@ -44,7 +44,7 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: frontend/build
 
-      # --- Docker (Spring Boot + React if needed) ---
+      # --- Docker (Backend image) ---
       - name: Log in to GitHub Container Registry
         uses: docker/login-action@v3
         with:
@@ -53,6 +53,11 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build & Push Docker image
-        run: |
-          docker build -t ghcr.io/${{ github.repository_owner }}/spring-react-app:latest .
-          docker push ghcr.io/${{ github.repository_owner }}/spring-react-app:latest
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          tags: |
+            ghcr.io/${{ github.repository_owner }}/events_website/backend:latest
+            ghcr.io/${{ github.repository_owner }}/events_website/backend:${{ github.sha }}
+          platforms: linux/amd64   # ✅ fixed to avoid arm64/alpine issues
