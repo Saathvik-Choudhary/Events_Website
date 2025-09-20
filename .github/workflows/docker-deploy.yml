@@ -1,31 +1,18 @@
-name: Build and Deploy
+name: Deploy React to GitHub Pages
 
 on:
   push:
     branches:
-      - main   # Auto-deploy on commits to main
+      - main
 
 jobs:
-  build-deploy:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
-      # --- Checkout code ---
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # --- Backend (Spring Boot) ---
-      - name: Set up JDK 17
-        uses: actions/setup-java@v4
-        with:
-          distribution: temurin
-          java-version: 17
-
-      - name: Build Spring Boot
-        run: mvn -B clean package -DskipTests
-        working-directory: backend   # change if backend folder is different
-
-      # --- Frontend (React) ---
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
@@ -35,29 +22,10 @@ jobs:
         run: |
           npm install
           npm run build
-        working-directory: frontend   # change if frontend folder is different
+        working-directory: frontend   # adjust folder if needed
 
-      # --- Deploy React build to GitHub Pages ---
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: frontend/build
-
-      # --- Docker (Backend image) ---
-      - name: Log in to GitHub Container Registry
-        uses: docker/login-action@v3
-        with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Build & Push Docker image
-        uses: docker/build-push-action@v5
-        with:
-          context: .
-          push: true
-          tags: |
-            ghcr.io/${{ github.repository_owner }}/events_website/backend:latest
-            ghcr.io/${{ github.repository_owner }}/events_website/backend:${{ github.sha }}
-          platforms: linux/amd64   # ✅ avoids alpine/multi-arch issue
