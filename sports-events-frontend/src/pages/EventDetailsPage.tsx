@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   Container,
   Typography,
@@ -17,7 +17,6 @@ import {
   ListItemText,
   Alert,
   CircularProgress,
-  useTheme,
 } from '@mui/material';
 import {
   LocationOn,
