@@ -25,20 +25,15 @@ import {
   People,
   AttachMoney,
   AccessTime,
-  Star,
-  Sports,
-  Info,
   BookOnline,
 } from '@mui/icons-material';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useEvent } from '../hooks/useEvents';
-import { EventType, DifficultyLevel } from '../types';
+import { DifficultyLevel } from '../types';
 
 const EventDetailsPage: React.FC = () => {
-  const theme = useTheme();
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  const [showBookingForm, setShowBookingForm] = useState(false);
 
   const { data: event, isLoading, error } = useEvent(parseInt(id || '0'));
 

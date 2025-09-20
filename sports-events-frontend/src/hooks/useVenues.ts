@@ -1,6 +1,5 @@
 import { useQuery, useInfiniteQuery } from '@tanstack/react-query';
 import { apiService } from '../services/api';
-import { Venue } from '../types';
 
 // Query keys
 export const venueKeys = {

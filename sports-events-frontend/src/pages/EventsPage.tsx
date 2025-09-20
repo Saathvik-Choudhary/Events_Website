@@ -10,15 +10,9 @@ import {
   Button,
   Chip,
   TextField,
-  FormControl,
-  InputLabel,
-  Select,
-  MenuItem,
-  Pagination,
   CircularProgress,
   Alert,
   Paper,
-  useTheme,
   IconButton,
   Fab,
 } from '@mui/material';
@@ -27,8 +21,6 @@ import {
   FilterList,
   LocationOn,
   CalendarToday,
-  People,
-  Star,
   ViewList,
   ViewModule,
 } from '@mui/icons-material';
@@ -51,7 +43,6 @@ interface EventFilters {
 }
 
 const EventsPage: React.FC = () => {
-  const theme = useTheme();
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
   

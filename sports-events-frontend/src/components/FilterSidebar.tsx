@@ -9,11 +9,7 @@ import {
   MenuItem,
   TextField,
   Slider,
-  FormGroup,
-  FormControlLabel,
-  Checkbox,
   Button,
-  Divider,
   Chip,
   Accordion,
   AccordionSummary,
@@ -29,8 +25,6 @@ import {
   LocationOn,
   CalendarToday,
   AttachMoney,
-  People,
-  Star,
 } from '@mui/icons-material';
 import { EventType, DifficultyLevel } from '../types';
 

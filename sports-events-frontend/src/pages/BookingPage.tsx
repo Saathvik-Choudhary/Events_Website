@@ -8,13 +8,8 @@ import {
   CardContent,
   TextField,
   Button,
-  FormControl,
-  InputLabel,
-  Select,
-  MenuItem,
   Alert,
   CircularProgress,
-  useTheme,
 } from '@mui/material';
 import {
   Person,
@@ -28,7 +23,6 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { useEvent } from '../hooks/useEvents';
 
 const BookingPage: React.FC = () => {
-  const theme = useTheme();
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const [formData, setFormData] = useState({

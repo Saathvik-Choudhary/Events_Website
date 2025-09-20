@@ -1,4 +1,4 @@
-import { Event, Category, Venue, User, Booking, EventType, DifficultyLevel, EventStatus, PaymentStatus, BookingStatus, Gender } from '../types';
+import { Event, Category, Venue, User, Booking, EventType, DifficultyLevel, EventStatus, PaymentStatus, BookingStatus } from '../types';
 
 // Mock Categories
 export const mockCategories: Category[] = [

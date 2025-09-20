@@ -9,22 +9,15 @@ import {
   CardMedia,
   Button,
   Chip,
-  Paper,
-  useTheme,
 } from '@mui/material';
 import {
   LocationOn,
   People,
-  Star,
-  Wifi,
-  LocalParking,
-  Restaurant,
 } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 import { useVenues } from '../hooks/useVenues';
 
 const VenuesPage: React.FC = () => {
-  const theme = useTheme();
   const navigate = useNavigate();
   const { data: venuesResponse, isLoading } = useVenues();
   const venues = venuesResponse?.content || [];

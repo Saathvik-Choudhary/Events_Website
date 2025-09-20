@@ -1,10 +1,9 @@
 import axios, { AxiosInstance, AxiosResponse } from 'axios';
-import { Event, Category, Venue, Booking, ApiResponse, EventFilters, EventType } from '../types';
+import { Event, Category, Venue, Booking, ApiResponse, EventType } from '../types';
 import { 
   mockEvents, 
   mockCategories, 
   mockVenues, 
-  mockBookings, 
   createMockApiResponse, 
   delay 
 } from './mockData';

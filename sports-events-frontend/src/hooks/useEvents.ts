@@ -1,6 +1,6 @@
 import { useQuery, useInfiniteQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { apiService } from '../services/api';
-import { Event, EventType, DifficultyLevel, Booking, BookingFormData } from '../types';
+import { EventType } from '../types';
 
 // Query keys
 export const eventKeys = {

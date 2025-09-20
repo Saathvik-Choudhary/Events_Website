@@ -8,19 +8,14 @@ import {
   CardContent,
   CardMedia,
   Button,
-  Chip,
-  useTheme,
 } from '@mui/material';
 import {
   Sports,
-  TrendingUp,
-  People,
 } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 import { useCategoriesWithActiveEvents } from '../hooks/useCategories';
 
 const CategoriesPage: React.FC = () => {
-  const theme = useTheme();
   const navigate = useNavigate();
   const { data: categories = [], isLoading } = useCategoriesWithActiveEvents();
 
