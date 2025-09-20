@@ -1,0 +1,84 @@
+spring:
+  application:
+    name: sports-events-platform
+  
+  # Database Configuration
+  datasource:
+    url: jdbc:h2:mem:sportsevents
+    driverClassName: org.h2.Driver
+    username: sa
+    password: 
+  
+  # JPA/Hibernate Configuration for Performance
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: create-drop
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: false
+        use_sql_comments: false
+        jdbc:
+          batch_size: 20
+        order_inserts: true
+        order_updates: true
+        batch_versioned_data: true
+  
+  # H2 Console for Development
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+  
+  # Caching Configuration
+  cache:
+    type: ehcache
+    ehcache:
+      config: classpath:ehcache.xml
+  
+  # Security Configuration
+  security:
+    user:
+      name: admin
+      password: admin123
+      roles: ADMIN
+
+# Performance Optimizations
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+  endpoint:
+    health:
+      show-details: when-authorized
+
+# Logging Configuration
+logging:
+  level:
+    com.sportsevents: INFO
+    org.springframework.cache: DEBUG
+    org.hibernate.SQL: WARN
+  pattern:
+    console: "%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"
+
+# Server Configuration
+server:
+  port: 8080
+  compression:
+    enabled: true
+    mime-types: text/html,text/xml,text/plain,text/css,text/javascript,application/javascript,application/json
+    min-response-size: 1024
+  http2:
+    enabled: true
+
+# API Documentation
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    operationsSorter: method
