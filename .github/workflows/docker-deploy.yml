@@ -3,14 +3,14 @@ name: Build and Deploy
 on:
   push:
     branches:
-      - main   # auto deploy on commits to main
+      - main   # Auto-deploy on commits to main
 
 jobs:
   build-deploy:
     runs-on: ubuntu-latest
 
     steps:
-      # --- Checkout ---
+      # --- Checkout code ---
       - name: Checkout code
         uses: actions/checkout@v4
 
@@ -23,7 +23,7 @@ jobs:
 
       - name: Build Spring Boot
         run: mvn -B clean package -DskipTests
-        working-directory: backend   # adjust if backend folder is different
+        working-directory: backend   # change if backend folder is different
 
       # --- Frontend (React) ---
       - name: Setup Node
@@ -35,7 +35,7 @@ jobs:
         run: |
           npm install
           npm run build
-        working-directory: frontend   # adjust if frontend folder is different
+        working-directory: frontend   # change if frontend folder is different
 
       # --- Deploy React build to GitHub Pages ---
       - name: Deploy to GitHub Pages
@@ -60,4 +60,4 @@ jobs:
           tags: |
             ghcr.io/${{ github.repository_owner }}/events_website/backend:latest
             ghcr.io/${{ github.repository_owner }}/events_website/backend:${{ github.sha }}
-          platforms: linux/amd64   # ✅ fixed to avoid arm64/alpine issues
+          platforms: linux/amd64   # ✅ avoids alpine/multi-arch issue
