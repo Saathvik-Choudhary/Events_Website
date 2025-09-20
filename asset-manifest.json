@@ -1,0 +1,12 @@
+{
+  "files": {
+    "main.css": "/Events_Website/static/css/main.a6640417.css",
+    "main.js": "/Events_Website/static/js/main.a7f5b7e6.js",
+    "static/js/206.5806f3f9.chunk.js": "/Events_Website/static/js/206.5806f3f9.chunk.js",
+    "index.html": "/Events_Website/index.html"
+  },
+  "entrypoints": [
+    "static/css/main.a6640417.css",
+    "static/js/main.a7f5b7e6.js"
+  ]
+}
